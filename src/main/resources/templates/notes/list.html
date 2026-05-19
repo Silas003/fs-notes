@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Notes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>My Notes</h2>
+        </header>
+
+        <div class="actions">
+            <a th:href="@{/notes/new}" class="btn">Add New Note</a>
+            
+            <form th:action="@{/notes}" method="get" class="search-form">
+                <input type="text" name="keyword" th:value="${keyword}" placeholder="Search notes...">
+                <button type="submit">Search</button>
+                <a th:href="@{/notes}" class="btn-clear" th:if="${keyword != null}">Clear</a>
+            </form>
+        </div>
+
+        <div th:if="${notes.empty}" class="info">
+            No notes found.
+        </div>
+
+        <div class="notes-grid">
+            <div th:each="note : ${notes}" class="note-card">
+                <div class="note-header">
+                    <h3 th:text="${note.title}">Title</h3>
+                    <span th:if="${note.category}" class="category-badge" th:text="${note.category.name}">Category</span>
+                </div>
+                <p th:text="${note.content}">Content</p>
+                <div class="tags-list" th:if="${not #lists.isEmpty(note.tags)}">
+                    <span th:each="tag : ${note.tags}" class="tag-badge" th:text="${tag.name}">Tag</span>
+                </div>
+                <div class="note-footer">
+                    <small th:text="${#temporals.format(note.createdAt, 'dd-MM-yyyy HH:mm')}">Date</small>
+                </div>
+                <div class="note-actions">
+                    <a th:href="@{/notes/edit/{id}(id=${note.id})}" class="btn-edit">Edit</a>
+                    <a th:href="@{/notes/delete/{id}(id=${note.id})}" class="btn-delete" onclick="return confirm('Are you sure?')">Delete</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" th:if="${totalPages > 0}">
+            <ul class="pagination-list">
+                <li th:class="${currentPage == 0} ? 'disabled' : ''">
+                    <a th:href="@{/notes(keyword=${keyword}, page=${currentPage - 1})}">&laquo; Previous</a>
+                </li>
+                <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:class="${currentPage == i} ? 'active' : ''">
+                    <a th:href="@{/notes(keyword=${keyword}, page=${i})}" th:text="${i + 1}">1</a>
+                </li>
+                <li th:class="${currentPage == totalPages - 1} ? 'disabled' : ''">
+                    <a th:href="@{/notes(keyword=${keyword}, page=${currentPage + 1})}">Next &raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
