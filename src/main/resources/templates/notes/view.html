@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${note.title}">Note</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar">
+    <a th:href="@{/}" class="navbar-brand">My Notes</a>
+    <a th:href="@{/new}" class="btn btn-primary btn-sm">+ New Note</a>
+</nav>
+
+<div class="page-sm">
+
+    <a th:href="@{/}" class="back-link">&larr; Back to notes</a>
+
+    <div class="card">
+        <div class="card-body">
+
+            <h1 class="note-detail-title" th:text="${note.title}">Title</h1>
+
+            <div class="note-meta">
+                <span th:if="${note.category}" class="badge badge-category" th:text="${note.category.name}">Category</span>
+                <span>Created <span th:text="${#temporals.format(note.createdAt, 'MMM d, yyyy, h:mm a')}">date</span></span>
+                <span th:if="${note.updatedAt != null and note.updatedAt != note.createdAt}">
+                    Updated <span th:text="${#temporals.format(note.updatedAt, 'MMM d, yyyy, h:mm a')}">date</span>
+                </span>
+            </div>
+
+            <div class="tags-list" th:if="${note.tags != null and !note.tags.isEmpty()}" style="margin-bottom: 20px;">
+                <span th:each="tag : ${note.tags}" class="badge badge-tag" th:text="${tag.name}">tag</span>
+            </div>
+
+            <div class="note-content" th:text="${note.content}">Note content</div>
+
+            <div class="note-detail-actions">
+                <a th:href="@{/edit/{id}(id=${note.id})}" class="btn btn-secondary">Edit</a>
+                <a th:href="@{/delete/{id}(id=${note.id})}" class="btn btn-danger"
+                   onclick="return confirm('Delete this note?')">Delete</a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

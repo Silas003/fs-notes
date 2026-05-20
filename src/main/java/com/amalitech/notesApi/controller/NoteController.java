@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping("/notes")
+@RequestMapping("/")
 public class NoteController {
     private final NoteServiceInterface noteService;
 
@@ -51,7 +51,13 @@ public class NoteController {
     @PostMapping
     public String createNote(@Valid @ModelAttribute NoteRequest request) {
         noteService.createNote(request);
-        return "redirect:/notes";
+        return "redirect:/";
+    }
+
+    @GetMapping("/view/{id}")
+    public String viewNote(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("note", noteService.getNoteById(id));
+        return "notes/view";
     }
 
     @GetMapping("/edit/{id}")
@@ -76,12 +82,12 @@ public class NoteController {
     @PostMapping("/update/{id}")
     public String updateNote(@PathVariable("id") Long id, @Valid @ModelAttribute NoteRequest request) {
         noteService.updateNote(id, request);
-        return "redirect:/notes";
+        return "redirect:/";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteNote(@PathVariable("id") Long id) {
         noteService.deleteNote(id);
-        return "redirect:/notes";
+        return "redirect:/";
     }
 }

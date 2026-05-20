@@ -1,39 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create Note</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Note</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="container">
-        <h2>Create New Note</h2>
-        <form th:action="@{/notes}" th:object="${noteRequest}" method="post">
-            <div class="form-group">
-                <label>Title:</label>
-                <input type="text" th:field="*{title}" required>
-                <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></p>
-            </div>
-            <div class="form-group">
-                <label>Content:</label>
-                <textarea th:field="*{content}" required rows="5"></textarea>
-                <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="error"></p>
-            </div>
-            <div class="form-group">
-                <label>Category:</label>
-                <select th:field="*{categoryId}">
-                    <option value="">-- Select Category --</option>
-                    <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Tags (comma separated):</label>
-                <input type="text" th:field="*{tags}" placeholder="e.g. work, important, personal">
-            </div>
-            <div class="form-actions">
-                <button type="submit">Save Note</button>
-                <a th:href="@{/notes}" class="btn-cancel">Cancel</a>
-            </div>
-        </form>
+
+<nav class="navbar">
+    <a th:href="@{/}" class="navbar-brand">My Notes</a>
+</nav>
+
+<div class="page-sm">
+
+    <a th:href="@{/}" class="back-link">&larr; Back to notes</a>
+
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">New Note</h1>
+        </div>
     </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form th:action="@{/}" th:object="${noteRequest}" method="post">
+
+                <div class="form-group">
+                    <label class="form-label" for="title">Title</label>
+                    <input id="title" type="text" class="form-control" th:field="*{title}"
+                           placeholder="Give your note a title" required>
+                    <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="form-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="content">Content</label>
+                    <textarea id="content" class="form-control" th:field="*{content}" rows="8"
+                              placeholder="Write your note here..." required></textarea>
+                    <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="form-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="categoryId">Category</label>
+                    <select id="categoryId" class="form-control" th:field="*{categoryId}">
+                        <option value="">No category</option>
+                        <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="tags">Tags</label>
+                    <input id="tags" type="text" class="form-control" th:field="*{tags}"
+                           placeholder="e.g. work, important, personal">
+                    <p class="form-hint">Separate tags with commas.</p>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save Note</button>
+                    <a th:href="@{/}" class="btn btn-secondary">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
