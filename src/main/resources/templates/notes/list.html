@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Notes</title>
+    <title>My Notes V1</title>
     <link rel="stylesheet" th:href="@{/css/style.css(v=2)}">
 </head>
 <body>
 
 <nav class="navbar">
-    <a th:href="@{/}" class="navbar-brand">My Notes</a>
-    <a th:href="@{/new}" class="btn btn-primary btn-sm">+ New Note</a>
+    <a th:href="@{/}" class="navbar-brand">My Notes v1</a>
+    <a th:href="@{/new}" class="btn btn-primary btn-sm">+ New Note v1</a>
 </nav>
 
 <div class="page">
@@ -38,23 +38,23 @@
         <p class="empty-state-title" th:if="${keyword == null or keyword.isEmpty()}">No notes yet</p>
         <p class="empty-state-text" th:if="${keyword != null and !keyword.isEmpty()}">Try a different keyword or clear the search.</p>
         <p class="empty-state-text" th:if="${keyword == null or keyword.isEmpty()}">Create your first note to get started.</p>
-        <a th:href="@{/new}" class="btn btn-primary" th:if="${keyword == null or keyword.isEmpty()}">+ New Note</a>
+        <a th:href="@{/new}" class="btn btn-primary" th:if="${keyword == null or keyword.isEmpty()}">+ New Note v1</a>
     </div>
 
     <div class="notes-grid" th:if="${!notes.empty}">
         <div th:each="note : ${notes}" class="note-card">
             <a th:href="@{/view/{id}(id=${note.id})}" class="note-card-link">
                 <div class="note-card-top">
-                    <span class="note-card-title" th:text="${note.title}">Title</span>
+                    <span class="note-card-title" th:text="${note.title}">Title v1</span>
                     <span th:if="${note.category}" class="badge badge-category" th:text="${note.category.name}">Cat</span>
                 </div>
                 <p class="note-card-body" th:text="${note.content}">Content preview</p>
                 <div class="tags-list" th:if="${note.tags != null and !note.tags.isEmpty()}">
-                    <span th:each="tag : ${note.tags}" class="badge badge-tag" th:text="${tag.name}">tag</span>
+                    <span th:each="tag : ${note.tags}" class="badge badge-tag" th:text="${tag.name}">tag v1</span>
                 </div>
             </a>
             <div class="note-card-footer">
-                <span class="note-card-date" th:text="${#temporals.format(note.createdAt, 'MMM d, yyyy')}">Date</span>
+                <span class="note-card-date" th:text="${#temporals.format(note.createdAt, 'MMM d, yyyy')}">Date v1</span>
                 <div class="note-card-actions">
                     <a th:href="@{/edit/{id}(id=${note.id})}" class="btn btn-ghost btn-sm">Edit</a>
                     <a th:href="@{/delete/{id}(id=${note.id})}" class="btn btn-ghost btn-sm"
