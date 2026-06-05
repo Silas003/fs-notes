@@ -34,5 +34,5 @@ jobs:
           REPOSITORY: ${{ secrets.REPOSITORY}}
         run: |
           docker build --platform linux/amd64 -t $REGISTRY/$REPOSITORY .
-          docker tag $REGISTRY/$REPOSITORY:latest
+          docker tag $REGISTRY/$REPOSITORY $REGISTRY/$REPOSITORY:latest
           docker push $REGISTRY/$REPOSITORY:latest
