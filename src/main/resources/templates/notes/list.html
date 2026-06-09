@@ -10,14 +10,14 @@
 
 <nav class="navbar">
     <a th:href="@{/}" class="navbar-brand">New update</a>
-    <a th:href="@{/new}" class="btn btn-primary btn-sm">+ New update</a>
+    <a th:href="@{/new}" class="btn btn-primary btn-sm">+ New update - second revision</a>
 </nav>
 
 <div class="page">
 
     <div class="page-header">
         <div>
-            <h1 class="page-title">New update</h1>
+            <h4 class="page-title">New update - second revision</h4>
             <p class="page-subtitle" th:if="${totalItems != null}"
                th:text="${totalItems + ' note' + (totalItems != 1 ? 's' : '')}"></p>
         </div>
