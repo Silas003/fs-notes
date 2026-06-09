@@ -38,7 +38,7 @@
         <p class="empty-state-title" th:if="${keyword == null or keyword.isEmpty()}">No notes yet</p>
         <p class="empty-state-text" th:if="${keyword != null and !keyword.isEmpty()}">Try a different keyword or clear the search.</p>
         <p class="empty-state-text" th:if="${keyword == null or keyword.isEmpty()}">Create your first note to get started.</p>
-        <a th:href="@{/new}" class="btn btn-primary" th:if="${keyword == null or keyword.isEmpty()}">+ New Note v1</a>
+        <a th:href="@{/new}" class="btn btn-primary" th:if="${keyword == null or keyword.isEmpty()}">+ New Note </a>
     </div>
 
     <div class="notes-grid" th:if="${!notes.empty}">
