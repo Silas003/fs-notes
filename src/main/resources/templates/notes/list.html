@@ -50,11 +50,11 @@
                 </div>
                 <p class="note-card-body" th:text="${note.content}">Content preview</p>
                 <div class="tags-list" th:if="${note.tags != null and !note.tags.isEmpty()}">
-                    <span th:each="tag : ${note.tags}" class="badge badge-tag" th:text="${tag.name}">tag v1</span>
+                    <span th:each="tag : ${note.tags}" class="badge badge-tag" th:text="${tag.name}">tag </span>
                 </div>
             </a>
             <div class="note-card-footer">
-                <span class="note-card-date" th:text="${#temporals.format(note.createdAt, 'MMM d, yyyy')}">Date v1</span>
+                <span class="note-card-date" th:text="${#temporals.format(note.createdAt, 'MMM d, yyyy')}">Date </span>
                 <div class="note-card-actions">
                     <a th:href="@{/edit/{id}(id=${note.id})}" class="btn btn-ghost btn-sm">Edit</a>
                     <a th:href="@{/delete/{id}(id=${note.id})}" class="btn btn-ghost btn-sm"
@@ -82,7 +82,7 @@
 </div>
 
 <footer class="site-footer">
-    &copy; 2026 My Notes &mdash; All rights reserved.
+    &copy; 2026 My Notes &mdash; All rights reserved.With love from @amalitech.com
 </footer>
 
 </body>
